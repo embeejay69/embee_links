@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "name": "MelBet",
+      "logo": "melbet-casino.jpg",
+      "patreon": false,
+      "url": "https://melbet-349949.top/en/registration?type=phone&bonus=SPORT"
+    },
+    {
+      "name": "Lularia_yusi",
+      "logo": "shaco-abeja.jpg",
+      "patreon": true,
+      "url": "https://www.twitch.tv/lularia_yusi"
+    },
+    {
+      "name": "Mari_yusi",
+      "patreon": true,
+      "logo": "shaco-abeja.jpg",
+      "url": "https://www.twitch.tv/mari_yusi"
+    }
+  ]
+}

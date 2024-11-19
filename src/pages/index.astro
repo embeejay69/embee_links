@@ -1,16 +1,188 @@
 ---
+import { AvatarUser } from "@components/avatar-user";
+import { FloatIcon } from "@components/float-icon";
+import { LinkDetail } from "@components/link-detail";
+import { SelectTheme } from "@components/select-theme";
+import { SponsorDetail } from "@components/sponsor-detail";
+import { BaseLayout } from "@layouts/base-layout";
+import { getSocialNetworks } from "@services/getSocialNetwork";
+import { getSponsors } from "@services/getSponsors";
+import { Image } from "astro:assets";
 
+const socialNetworks = getSocialNetworks();
+const sponsors = getSponsors();
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<BaseLayout title="Embeejayz">
+  <main>
+    <div class="select-theme-container"><SelectTheme /></div>
+    <div class="avatar-container">
+      <FloatIcon
+        url="/logos/skt-t1.png"
+        left="80px"
+        top="35px"
+        width={95}
+        height={60}
+        color="var(--primary)"
+      />
+      <FloatIcon
+        url="/images/star.png"
+        left="80px"
+        top="120px"
+        width={15}
+        height={15}
+        color="#FEB424ff"
+      />
+      <FloatIcon
+        url="/images/star.png"
+        left="115px"
+        top="120px"
+        width={15}
+        height={15}
+        color="#FEB424ff"
+      />
+      <FloatIcon
+        url="/images/star.png"
+        left="150px"
+        top="120px"
+        width={15}
+        height={15}
+        color="#FEB424ff"
+      />
+      <AvatarUser />
+      <FloatIcon
+        color="var(--primary)"
+        url="/logos/t1.png"
+        right="80px"
+        top="35px"
+        width={95}
+        height={60}
+      />
+      <FloatIcon
+        url="/images/star.png"
+        right="130px"
+        top="120px"
+        width={15}
+        height={15}
+        color="#FEB424ff"
+      />
+      <FloatIcon
+        url="/images/star.png"
+        right="100px"
+        top="120px"
+        width={15}
+        height={15}
+        color="#FEB424ff"
+      />
+    </div>
+    <section class="social-network-container">
+      {
+        socialNetworks.map((socialNetwork) => (
+          <LinkDetail
+            icon={socialNetwork.icon}
+            name={socialNetwork.name}
+            url={socialNetwork.url}
+            color={socialNetwork.color}
+            negativeColor={socialNetwork.negativeColor}
+          />
+        ))
+      }
+    </section>
+    <section class="sponsor-container">
+      <h2>
+        Este proyecto es posible gracias a ustedes y a nuestros patrocinadores:
+      </h2>
+      <div class="sponsors">
+        {
+          sponsors.map((sponsor) => (
+            <SponsorDetail
+              name={sponsor.name}
+              url={sponsor.url}
+              image={sponsor.logo}
+              patreon={sponsor.patreon}
+            />
+          ))
+        }
+      </div>
+    </section>
+    <section>
+      <h2>Continua apoyandonos para seguir creciendo juntos 🚀</h2>
+      <LinkDetail
+        icon={"patreon.svg"}
+        name={"Patreon"}
+        url="https://www.patreon.com/embeejayz"
+        color="#000"
+        negativeColor="#fff"
+      />
+      <a
+        class="embee-donations"
+        href="https://streamlabs.com/embeejayz/tip"
+        target="_blank"
+      >
+      </a>
+    </section>
+    <Image
+      class="shaco-dance"
+      src="/gifs/shaco-dance.gif"
+      alt="Shaco dance"
+      width={100}
+      height={100}
+    />
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    width: 100%;
+  }
+  .select-theme-container {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    padding-inline: 55px;
+    width: 100%;
+  }
+  .avatar-container {
+    position: relative;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  section {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    gap: 25px;
+    width: 100%;
+  }
+
+  .sponsor-container h2 {
+    font-size: 24px;
+  }
+  .sponsors {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 800px;
+    max-width: 80dvw;
+  }
+  .embee-donations {
+    background-image: url("/banners/donaciones.png");
+    background-size: cover;
+    background-position: center;
+    aspect-ratio: 307/164;
+    width: 200px;
+  }
+  .shaco-dance {
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+  }
+</style>
